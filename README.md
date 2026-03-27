@@ -311,21 +311,6 @@ GCP_FIRESTORE_DB=session-states
 
 ```
 
-### Sample Documents
-
-Generate the sample loan application PDFs before running the agent:
-
-```bash
-uv run python data/generate_sample_applications.py
-```
-
-This creates two PDFs in `data/sample_applications/`:
-
-- `sample_application_complete.pdf` -- Happy path (all fields present, strong financials)
-- `sample_application_incomplete.pdf` -- Same application with missing fields (triggers repair & resume)
-
-Both represent the same fictional business (Cymbal Coffee Roasters LLC / Jane Doe). The incomplete version is missing the loan amount requested to demonstrate the pause, repair & resume flow.
-
 ### Running the Agent
 
 ```bash
@@ -333,11 +318,16 @@ Both represent the same fictional business (Cymbal Coffee Roasters LLC / Jane Do
 uv run adk web
 ```
 
-Then open `http://localhost:8000`, select `capital_allocation_strategy_agent`, upload a sample PDF, and send:
+Then open `http://localhost:8000`, select `capital_allocation_strategy_agent` in your Incognito UI dashboard, and send a text query!
+
+### Example Demo Query
+
+Copy and paste this query into your ADK dashboard to run the full visual C-Suite evaluation:
 
 ```
-Process this loan application for SBL-2025-00142
+We are losing 4% MoM in the 'Artisan' segment to Square/Stripe. Analyze our Q1 risk data and external market comps. Identify the 'High-Growth' segment we can win back and propose a proactive capital structure that beats the competition while staying within our Tier 1 capital ratios.
 ```
+
 
 ## D. Customization & Extension
 

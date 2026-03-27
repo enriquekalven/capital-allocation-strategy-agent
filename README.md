@@ -169,7 +169,7 @@ sequenceDiagram
     alt User approves
         User->>Orch: "yes"
         Orch->>+GA: Finalize executive canvas
-        GA->>GA: finalize_loan_decision
+        GA->>GA: finalize_structure_decision
         GA-->>FS: state_logging (step data)
         GA-->>-Orch: Board Memo (Pydantic)
     else User rejects
@@ -399,25 +399,26 @@ uv run pytest tests/integration
 
 ## F. Evaluation
 
-Ensuring the reliability and accuracy of the Small Business Loan Agent is critical before deploying it in a live lending environment. We use the [ADK evaluation framework](https://google.github.io/adk-docs/evaluate/) with an LLM-as-Judge approach to validate both the intermediate steps (sub-agent orchestration) and the final outcome (response quality).
+Ensuring the reliability and accuracy of the C-Suite Strategy Agent is critical before deploying it in a live boardroom environment. We use the [ADK evaluation framework](https://google.github.io/adk-docs/evaluate/) with an LLM-as-Judge approach to validate both the intermediate steps (sub-agent orchestration) and the final outcome (response quality).
 
 ### Evaluation Methodology
 
-Our evaluation treats the multi-agent system as a complete pipeline, measuring its performance against a curated dataset of loan application scenarios. We evaluate both the tool call trajectory (did the orchestrator call the right agents in the right order?) and the final response (is the output complete, clear, and semantically correct?).
+Our evaluation treats the multi-agent system as a complete pipeline, measuring its performance against a curated dataset of strategy scenarios. We evaluate both the tool call trajectory (did the orchestrator call the right agents in the right order?) and the final response (is the output complete, clear, and semantically correct?).
 
 **The process involves:**
 
-1. **Dataset Ingestion**: Feeding test cases — complete applications, incomplete applications, and resume-after-repair scenarios — into the agent as multi-turn conversations.
+1. **Dataset Ingestion**: Feeding test cases — complete datasets, incomplete datasets, and resume-after-repair scenarios — into the agent as multi-turn conversations.
 2. **Execution Tracing**: Logging the orchestrator's routing decisions, sub-agent calls, and tool invocations for each turn.
 3. **LLM-as-Judge Assertion**: Using Gemini as a judge model to evaluate tool ordering against rubrics and compare final responses against expected outputs.
+
 
 ### Test Cases
 
 | Test Case | Description | Turns |
 | --- | --- | --- |
-| `happy_path_with_approval` | Full end-to-end flow: submit complete PDF, process through all 4 sub-agents, user approves, loan decision finalized | 2 |
-| `stop_for_reparation_missing_fields` | Incomplete PDF (missing `loan_amount_requested`): agent stops after DocumentExtraction, reports missing fields, halts workflow | 1 |
-| `resume_after_repair` | Pre-repaired state in Firestore: agent detects completed DocumentExtraction, resumes from UnderwritingAgent, processes through Pricing | 1 |
+| `happy_path_with_approval` | Full end-to-end flow: submit query, process through all 4 sub-agents, user approves, strategy decision finalized | 2 |
+| `stop_for_reparation_missing_fields` | Incomplete data (missing metrics): agent stops after MarketIntelligence, reports missing data, halts workflow | 1 |
+| `resume_after_repair` | Pre-repaired state in Firestore: agent detects completed MarketIntelligence, resumes from PortfolioRiskAgent, processes through Pricing | 1 |
 
 ### Evaluation Criteria
 
@@ -434,18 +435,19 @@ Our evaluation treats the multi-agent system as a complete pipeline, measuring i
   | Rubric | Rule |
   | --- | --- |
   | `status_first` | `check_process_status` is called before any agent tools on the initial request |
-  | `extraction_before_underwriting` | `DocumentExtractionAgent` is called before `UnderwritingAgent` |
-  | `underwriting_before_pricing` | `UnderwritingAgent` is called before `PricingAgent` |
-  | `pricing_before_decision` | `PricingAgent` is called before `LoanDecisionAgent` |
-  | `approval_required` | `LoanDecisionAgent` is only called after user approval |
+  | `intelligence_before_risk` | `MarketIntelligenceAgent` is called before `PortfolioRiskAgent` |
+  | `risk_before_structure` | `PortfolioRiskAgent` is called before `CapitalStructureAgent` |
+  | `structure_before_governance` | `CapitalStructureAgent` is called before `GovernanceAuditorAgent` |
+  | `approval_required` | `GovernanceAuditorAgent` is only called after user approval |
 
 - **Response Quality (Final Response Rubrics)**: Is the agent's output complete and actionable?
 
   | Rubric | Rule |
   | --- | --- |
-  | `loan_summary_completeness` | Response includes business name, owner, loan amount, revenue, eligibility, risk tier, rate, and payment |
+  | `strategy_summary_completeness` | Response includes diagnostic leakage metrics, risk Tier 1 data, and Strategic capital responses |
   | `clear_next_step` | Response clearly indicates next action: approval prompt, completion confirmation, status report, or missing info request |
   | `error_handling_clarity` | When data is missing or an error occurs, the response clearly identifies what is missing or wrong |
+
 
 - **Semantic Response Match**: Does the agent's final response convey the same information as the expected reference response? Threshold set to 0.7 to account for natural LLM wording variation.
 

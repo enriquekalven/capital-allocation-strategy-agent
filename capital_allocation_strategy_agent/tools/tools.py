@@ -133,9 +133,8 @@ def check_process_status(tool_context: ToolContext) -> dict:
         return {
             "status": "initialized",
             "action": "proceed_to_analysis",
-            "message": f"Simulating local execution state for {loan_request_id} (Cloud Firestore bypass)."
+            "message": f"Simulating local execution state for {loan_request_id} (Cloud Firestore bypass).",
         }
-
 
 
 def nano_banana_image_gen(tool_context: ToolContext, prompt: str) -> dict:

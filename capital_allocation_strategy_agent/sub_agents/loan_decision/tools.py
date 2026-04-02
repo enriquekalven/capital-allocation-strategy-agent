@@ -41,13 +41,11 @@ def finalize_loan_decision(tool_context: ToolContext) -> dict:
         if not loan_request_id:
             loan_request_id = "STRAT-2026-00142"
 
-
         if not application_data:
             application_data = {"loan_amount_requested": "$1,000,000", "loan_term_months": "60"}
 
         if not pricing_data:
             pricing_data = {"interest_rate": "7.5%"}
-
 
         strategy_directive_id = tool_context.state.get("strategy_directive_id")
         if not strategy_directive_id:
@@ -80,7 +78,6 @@ def finalize_loan_decision(tool_context: ToolContext) -> dict:
                 "The target interest simulation maintains compliance within Tier 1 constraints."
             ),
         }
-
 
     except Exception as e:
         logger.error(f"Error finalizing loan decision: {e}")

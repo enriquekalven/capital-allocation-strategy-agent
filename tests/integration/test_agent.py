@@ -55,7 +55,7 @@ REGRESSION_QUESTIONS = [
     "Can you assess the risk of re-allocating 15% of our growth capital to emerging markets, considering our current Tier 1 ratios?",
     "How are our competitors impacting our 'Premium Banking' segment, and what capital adjustments should we consider?",
     "I need a comprehensive strategic response to the Q3 market shifts. Focus on dynamic capital structures.",
-    "Can you generate a visual concept for a new marketing campaign to support the 'NextGen Banking' initiative?"
+    "Can you generate a visual concept for a new marketing campaign to support the 'NextGen Banking' initiative?",
 ]
 
 
@@ -72,4 +72,3 @@ async def test_status_check():
     """Agent should handle a status check request."""
     response = await _run_agent("What is the status on SBL-2025-12345")
     assert response, "Agent returned an empty response"
-

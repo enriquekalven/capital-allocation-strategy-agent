@@ -47,7 +47,6 @@ class TestDetermineProcessAction:
         # Because define_resume_point defaults to the first not completed step (MarketIntelligenceAgent), it returns resume!
         assert result["action"] == "resume"
 
-
     def test_resume_status(self):
         # Action is resume when we find a step to execute next
         state = {
@@ -56,11 +55,12 @@ class TestDetermineProcessAction:
             "steps": {
                 "MarketIntelligenceAgent": {"status": "completed", "data": {"output": 123}},
                 "PortfolioRiskAgent": {"status": "not_started"},
-            }
+            },
         }
         result = determine_process_action(state)
         assert result["action"] == "resume"
         assert result["next_step_to_execute"] == "PortfolioRiskAgent"
+
 
 # --- find_resume_point ---
 
@@ -86,8 +86,6 @@ class TestFindResumePoint:
         assert next_step == "PortfolioRiskAgent"
         assert "MarketIntelligenceAgent" in completed
         assert completed["MarketIntelligenceAgent"] == {"output": 123}
-
-
 
 
 # --- _parse_dollar_amount ---

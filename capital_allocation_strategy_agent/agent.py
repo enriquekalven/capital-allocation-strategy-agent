@@ -61,7 +61,6 @@ root_agent = LlmAgent(
     instruction=ORCHESTRATOR_PROMPT,
     description="Orchestrates capital allocation strategy by coordinating sub-agents, handling user approval, and managing the complete application workflow",
     planner=BuiltInPlanner(thinking_config=ThinkingConfig(include_thoughts=True)),
-
     before_agent_callback=extract_request_id_from_request,
     before_tool_callback=before_tool_callback_check_process_status,
     after_agent_callback=llm_judge_gate,

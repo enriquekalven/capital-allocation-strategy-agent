@@ -14,7 +14,6 @@
 
 """Unit tests for the Pricing/Capital Structure Agent tools."""
 
-import pytest
 from unittest.mock import MagicMock
 from capital_allocation_strategy_agent.sub_agents.pricing.tools import calculate_loan_pricing
 
@@ -35,15 +34,9 @@ class TestCalculateLoanPricing:
     def test_calculate_with_real_state(self):
         mock_context = MagicMock()
         mock_context.state = {
-            "DocumentExtractionAgent_output": {
-                "loan_amount_requested": "$500,000",
-                "loan_term_months": "36"
-            },
-            "UnderwritingAgent_output": {
-                "eligibility_status": "ELIGIBLE",
-                "risk_flags": []
-            },
-            "loan_request_id": "REQ-123"
+            "DocumentExtractionAgent_output": {"loan_amount_requested": "$500,000", "loan_term_months": "36"},
+            "UnderwritingAgent_output": {"eligibility_status": "ELIGIBLE", "risk_flags": []},
+            "loan_request_id": "REQ-123",
         }
 
         result = calculate_loan_pricing(mock_context)

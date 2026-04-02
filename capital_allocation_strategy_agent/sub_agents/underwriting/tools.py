@@ -55,7 +55,6 @@ MOCK_INTERNAL_RECORDS = {
 }
 
 
-
 def get_internal_business_data(tool_context: ToolContext) -> dict:
     """
     Retrieve Cymbal Bank's internal business records for underwriting validation.

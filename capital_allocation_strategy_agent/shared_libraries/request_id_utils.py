@@ -52,4 +52,3 @@ def extract_request_id_from_text(text: str) -> str:
             '  - "What is the status on STRAT-2026-00142?"\n'
             '  - "Resume processing for STRAT-2026-00142"'
         )
-

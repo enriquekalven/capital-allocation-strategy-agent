@@ -44,7 +44,6 @@ AGENT_OUTPUT_KEYS = [
 ]
 
 
-
 def _parse_event_parts(event: Any) -> tuple[list[str], str | None, str | None]:
     """Parse a single event's parts to extract tool calls and text content."""
     content = getattr(event, "content", None)
@@ -179,11 +178,9 @@ async def llm_judge_gate(
                     genai_types.Part(
                         text=(
                             "I apologize, but I need to verify some information before providing a response. "
-
                             "This is to ensure accuracy in your capital allocation analysis.\n\n"
                             f"Reference ID: {request_id or 'N/A'}\n\n"
                             "Please try your request again, or contact support if this issue persists."
-
                         )
                     )
                 ],

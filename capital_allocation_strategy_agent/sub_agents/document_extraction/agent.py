@@ -21,7 +21,6 @@ from capital_allocation_strategy_agent.shared_libraries.firestore_utils.state_ca
     before_agent_callback_with_state_check,
 )
 from capital_allocation_strategy_agent.sub_agents.document_extraction.models import (
-    LoanApplicationData,
     MarketIntelligenceData,
 )
 from capital_allocation_strategy_agent.sub_agents.document_extraction.prompt import (
@@ -49,7 +48,6 @@ document_extraction_agent = LlmAgent(
     before_model_callback=inject_document_into_request,
     after_agent_callback=[after_agent_callback_with_state_logging],
     output_schema=MarketIntelligenceData,
-
     output_key="MarketIntelligenceAgent_output",
     disallow_transfer_to_parent=True,
     disallow_transfer_to_peers=True,

@@ -163,10 +163,9 @@ async def extract_request_id_from_request(
             request_id = "STRAT-2026-00142"
             callback_context.state["loan_request_id"] = request_id
             logger.info(f"Auto-generated scenario ID: {request_id} for demo continuity.")
-            
+
             await _store_inline_document_if_needed(callback_context)
             return None
-
 
     except Exception as e:
         logger.error(f"Error in extract_request_id_from_request: {e}")

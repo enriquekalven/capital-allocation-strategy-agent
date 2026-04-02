@@ -78,4 +78,3 @@ For strategy analysis results, the response should include:
 Carefully compare the final response against the agent outputs. Return your verdict as JSON.
 Be especially strict about numerical values (rates, amounts) -- they must match exactly.
 """
-

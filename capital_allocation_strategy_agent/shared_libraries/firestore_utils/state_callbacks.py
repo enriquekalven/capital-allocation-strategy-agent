@@ -19,9 +19,7 @@ Integrates with Firestore to log agent execution state, check prerequisites
 before agent execution, and enable resume capability after human intervention.
 """
 
-import json
 
-from pathlib import Path
 
 from google.adk.agents.callback_context import CallbackContext
 from capital_allocation_strategy_agent.shared_libraries.firestore_utils.state_service import (
@@ -78,7 +76,6 @@ async def before_agent_callback_with_state_check(
         callback_context.state["loan_request_id"] = enterprise_id
         logger.info(f"Auto-assigned default scenario ID {enterprise_id} for sub-agent {agent_name}")
 
-
     try:
         state_service = ProcessStateService()
 
@@ -95,7 +92,6 @@ async def before_agent_callback_with_state_check(
     except Exception as e:
         logger.warning(f"Firestore not available in state_callbacks, skipping remote state check: {e}")
         # Let it proceed locally without Firestore blocks
-
 
 
 def _check_for_issues(agent_name: str, output_data) -> tuple[bool, str, list]:

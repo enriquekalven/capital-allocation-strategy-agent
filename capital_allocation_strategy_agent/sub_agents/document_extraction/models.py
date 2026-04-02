@@ -115,8 +115,8 @@ class LoanApplicationData(BaseModel):
         description="Description of collateral offered to secure the loan",
     )
 
-class MarketIntelligenceData(BaseModel):
 
+class MarketIntelligenceData(BaseModel):
     """Structured output model for strategic market intelligence."""
 
     segment_name: str = Field(
@@ -131,4 +131,3 @@ class MarketIntelligenceData(BaseModel):
         default="",
         description="Bullet list of competitor movement (Stripe, Square, 4.5% yield-on-cash sweep)",
     )
-

@@ -34,4 +34,3 @@ IMPORTANT:
 - Use its outputs (competitor moat, projected IRR, rate_justification) to formulate your strategy.
 - Your output must fit the sub-agent output schema format. If you see retail loan terms (like monthly payment), use them as proxy for strategic cost-of-funds!
 """
-

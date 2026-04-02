@@ -79,7 +79,6 @@ def calculate_loan_pricing(tool_context: ToolContext) -> dict:
             underwriting_output = {"eligibility_status": "ELIGIBLE", "risk_flags": []}
             logger.warning("No underwriting_output found, using mock C-Suite defaults")
 
-
         logger.info(f"Calculating pricing for: {loan_request_id}")
 
         # Parse loan details
@@ -125,7 +124,6 @@ def calculate_loan_pricing(tool_context: ToolContext) -> dict:
                 f"Loan amount ${loan_amount:,.0f} over {term_months} months."
             ),
         }
-
 
     except Exception as e:
         logger.error(f"Error calculating loan pricing: {e}")

@@ -32,13 +32,7 @@ class FieldComparison(BaseModel):
 class StrategyBoardBriefing(BaseModel):
     """Structured output model for the C-Suite Strategy Board Briefing."""
 
-    tier_1_capital_status: str = Field(
-        description="Current Tier 1 capital status (e.g., 'MAINTAINED' or 'BREACHED')"
-    )
-    risk_score: str = Field(
-        description="A numeric or categorical risk score (e.g., 'M1 - Low Risk')"
-    )
-    compliance_notes: str = Field(
-        description="Any concerns regarding regulatory limits or credit policies"
-    )
+    tier_1_capital_status: str = Field(description="Current Tier 1 capital status (e.g., 'MAINTAINED' or 'BREACHED')")
+    risk_score: str = Field(description="A numeric or categorical risk score (e.g., 'M1 - Low Risk')")
+    compliance_notes: str = Field(description="Any concerns regarding regulatory limits or credit policies")
     summary: str = Field(description="Executive summary of the portfolio risk impact or strategy outline")
